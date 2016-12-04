@@ -1,0 +1,306 @@
+@font-face {
+font-family: 'DroidKufi-Regular';
+src: url('DroidKufi-Regular.woff') format('woff');
+}
+body{
+    background: #fff;
+    font-family: 'DroidKufi-Regular';
+}
+.navbar, .dropdown-menu{
+background:#2980b9 ;
+    direction: rtl;
+border: none;
+
+}
+.navbar-header{
+float: right;
+        direction: rtl;
+
+    
+}
+.navbar-wrapper
+{
+margin-bottom: 3.5%;
+}
+.navbar-brand
+{    direction: rtl;
+
+        padding-top: 15PX;
+
+padding-left: 180px;
+}
+.btn-warning{
+padding-top: 15px;
+    background-color: transparent;
+    height: 57px;
+    border: 0;
+    border-radius: 0;
+}
+.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a, .dropdown-menu>li{
+  border-bottom: 3px solid transparent;
+}
+.nav>li>a:focus, .nav>li>a:hover,.nav .open>a, .nav .open>a:focus, .nav .open>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+  border-bottom: 3px solid transparent;
+  background: rgba(154, 154, 154, 0.27);
+}
+.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .navbar-toggle{
+ color: #fff;
+}
+.dropdown-menu{
+      -webkit-box-shadow: none;
+    box-shadow:none;
+}
+
+.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
+  border-bottom: #b6f423 4px solid;
+}
+.nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2){
+  border-bottom: #82e2ea 4px solid;
+}
+.nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3){
+  border-bottom: #f8b42c 4px solid;
+}
+.nav li:hover:nth-child(8n+4), .nav li.active:nth-child(8n+4){
+  border-bottom: #fd594a 4px solid;
+}
+.nav li:hover:nth-child(8n+5), .nav li.active:nth-child(8n+5){
+  border-bottom: #e8479d 4px solid;
+}
+.nav li:hover:nth-child(8n+6), .nav li.active:nth-child(8n+6){
+  border-bottom: #a12eeb 4px solid;
+}
+.nav li:hover:nth-child(8n+7), .nav li.active:nth-child(8n+7){
+  border-bottom: #4785d9 4px solid;
+}
+.nav li:hover:nth-child(8n+8), .nav li.active:nth-child(8n+8){
+  border-bottom: #2aed9a 4px solid;
+}
+
+.navbar-toggle .icon-bar{
+    color: #fff;
+    background: #000000;
+}
+
+/* Credit to bootsnipp.com for the css for the color graph 
+ ESTO SOLO ES PARA EL FORMULARIO DE LOGIN
+*/
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+
+/* Carousel Styles */
+.carousel-indicators .active {
+    background-color: #2980b9;
+}
+.carousel-inner
+{
+background-color:rgba(128,128,128);
+
+width: 100%;
+}f
+.carousel-inner img {
+    width: 100%;
+    max-height: 600px;
+opacity:.4;  
+        
+}
+
+.carousel-control {
+    width: 100;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	background-image: none;
+	background-repeat: no-repeat;
+	text-shadow: none;
+}
+
+
+
+.carousel-control .glyphicon-chevron-left, 
+.carousel-control .glyphicon-chevron-right, 
+.carousel-control .icon-prev, 
+.carousel-control .icon-next {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+	display: inline-block;
+    padding-top: 1%;
+    
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .icon-prev {
+	left: 0;
+}
+
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next {
+	right: 0;
+}
+
+.carousel-control.left span,
+.carousel-control.right span {
+	background-color: #2980b9;
+    border-radius: 50PX;
+        height: 35;
+    width: 35;
+
+    
+}
+.carousel-control.left span{
+margin-left: 50PX;
+}
+.carousel-control.right span {
+margin-right: 50PX;
+}
+.carousel-control.left span:hover,
+.carousel-control.right span:hover {
+	opacity: .5;
+	filter: alpha(opacity=50);
+}
+
+/* Carousel Header Styles */
+.header-text {
+    position: absolute;
+    top: 30%;
+    left: 1.8%;
+    right: auto;
+   
+    width: 96.66666666666666%;
+    color: #34495e;
+}
+
+.header-text h2 {
+    padding-bottom: 15px;
+    font-size: 40px;
+    
+}
+
+.header-text h2 span {
+    background-color: transparent;
+    font-size: 100%;
+ background-color: rgba(255,215,0,.9);
+    border-radius: 40px;
+    opacity: .1;
+    padding: 10px;
+}
+
+.header-text h3 span {
+	padding: 15px;
+}
+
+.btn-min-block {
+    min-width: 170px;
+    line-height: 26px;
+}
+
+.btn-theme {
+    color: #fff;
+    background-color: #34495e;
+    border: 2px solid ;
+    margin-right: 15px;
+}
+
+.btn-theme:hover {
+    color: #34495e;
+    background-color: #fff;
+}
+.col-md-4 {
+    float: right;
+}
+.page-section {
+    text-align: center;
+    padding: 140px 0px;
+}
+.box.artwork img {
+	max-width: 230px;
+    padding-right: 80px;
+}
+.box .artwork img {
+	max-width: 190px;
+}
+.box .titles {
+	font-size: 23px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	text-align: center;
+    
+}
+
+.box p {
+	font-size: 15px;
+    text-align: center;
+}
+
+.affiliatex {
+    margin-bottom: 75px;
+    margin-top: 30px;
+    text-align: center;
+}
+.artwork
+{
+text-align: center;
+}
+p
+{
+    font-size: 19px;
+    line-height: 200%;
+text-align: center;
+}
+
+.animated.fadeInLeft {
+    animation-name: fadeInRight;
+}
+.animated {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+}
+.about
+{
+width: 100%;
+    background-color: #ecf0f1 ;
+
+}
+.section-title2 {
+    color: #666;
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 30px 0 20px;
+    text-align: center;
+}
+
+.cards
+{
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color : #f1c40f;
+}
+
+.arts {
+     width: 150px;
+    height: 150px;
+}
+.owl
+{
+    margin: 90px;
+
+}
+.adv
+{
+padding-top: 20px;
+    padding-bottom: 20px;
+    background-color : #ecf0f1;
+}
