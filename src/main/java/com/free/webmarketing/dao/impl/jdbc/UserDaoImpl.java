@@ -24,19 +24,12 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		try {
 			String generatedColumns[] = { "id" };
 
-			stmt = connection.prepareStatement("INSERT INTO " + DBEnum.user + " ( " + DBEnum.User.userName + " , "
-					+ DBEnum.User.email + " , " + DBEnum.User.siteNumber + " , " + DBEnum.User.siteName + " , "
-					+ DBEnum.User.securityQuestion + " , " + DBEnum.User.securityAnswer + " , " + DBEnum.User.password
-					+ " )VALUES(?,?,?,?,?,?,?)", generatedColumns);
+			stmt = connection.prepareStatement("INSERT INTO " + DBEnum.user + " ( " + DBEnum.User.email + " , "
+					+ DBEnum.User.password + " , " + DBEnum.User.name + " )VALUES(?,?,?)", generatedColumns);
 
-			stmt.setString(1, user.getUsername());
-			stmt.setString(2, user.getEmail());
-			stmt.setString(3, user.getSiteNumber());
-			stmt.setString(4, user.getSiteName());
-			stmt.setString(5, user.getSecurityQuestion());
-			stmt.setString(6, user.getSecurityAnswer());
-			stmt.setString(7, user.getPassword());
-
+			stmt.setString(1, user.getEmail());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getName());
 			int count = stmt.executeUpdate();
 
 			try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
@@ -59,24 +52,26 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 	@Override
 	public boolean isUsernameExits(Connection connection, String username) {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			String sql = "SELECT id FROM " + DBEnum.user + " WHERE " + DBEnum.User.userName + " = ?";
-
-			stmt = connection.prepareStatement(sql);
-
-			stmt.setString(1, username);
-
-			rs = stmt.executeQuery();
-
-			return rs.next();
-		} catch (Exception e) {
-			logger.error(e);
-			return false;
-		} finally {
-			cleanUp(stmt, rs);
-		}
+		// PreparedStatement stmt = null;
+		// ResultSet rs = null;
+		// try {
+		// String sql = "SELECT id FROM " + DBEnum.user + " WHERE " +
+		// DBEnum.User.userName + " = ?";
+		//
+		// stmt = connection.prepareStatement(sql);
+		//
+		// stmt.setString(1, username);
+		//
+		// rs = stmt.executeQuery();
+		//
+		// return rs.next();
+		// } catch (Exception e) {
+		// logger.error(e);
+		// return false;
+		// } finally {
+		// cleanUp(stmt, rs);
+		// }
+		return false;
 	}
 
 	@Override
@@ -103,26 +98,28 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 	@Override
 	public boolean isUsernameExits(Connection connection, String username, int id) {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			String sql = "SELECT id FROM " + DBEnum.user + " WHERE " + DBEnum.User.userName + " = ? and "
-					+ DBEnum.User.id + " != ?";
-
-			stmt = connection.prepareStatement(sql);
-
-			stmt.setString(1, username);
-			stmt.setInt(2, id);
-
-			rs = stmt.executeQuery();
-
-			return rs.next();
-		} catch (Exception e) {
-			logger.error(e);
-			return false;
-		} finally {
-			cleanUp(stmt, rs);
-		}
+		// PreparedStatement stmt = null;
+		// ResultSet rs = null;
+		// try {
+		// String sql = "SELECT id FROM " + DBEnum.user + " WHERE " +
+		// DBEnum.User.userName + " = ? and "
+		// + DBEnum.User.id + " != ?";
+		//
+		// stmt = connection.prepareStatement(sql);
+		//
+		// stmt.setString(1, username);
+		// stmt.setInt(2, id);
+		//
+		// rs = stmt.executeQuery();
+		//
+		// return rs.next();
+		// } catch (Exception e) {
+		// logger.error(e);
+		// return false;
+		// } finally {
+		// cleanUp(stmt, rs);
+		// }
+		return false;
 	}
 
 	@Override
@@ -153,39 +150,41 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	@Override
 	public User findUserByUsername(Connection connection, String username) {
 
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		try {
-			String sql = "SELECT * FROM " + DBEnum.user + " WHERE " + DBEnum.User.userName + " = ?";
-
-			stmt = connection.prepareStatement(sql);
-
-			stmt.setString(1, username);
-
-			rs = stmt.executeQuery();
-
-			User user = null;
-
-			if (rs.next()) {
-				user = new User();
-				user.setId(rs.getInt(DBEnum.User.id));
-				user.setUsername(rs.getString(DBEnum.User.userName));
-				user.setEmail(rs.getString(DBEnum.User.email));
-				user.setPassword(rs.getString(DBEnum.User.password));
-				user.setSecurityAnswer(rs.getString(DBEnum.User.securityAnswer));
-				user.setSecurityQuestion(rs.getString(DBEnum.User.securityQuestion));
-				user.setSiteName(rs.getString(DBEnum.User.siteName));
-				user.setSiteNumber(rs.getString(DBEnum.User.siteNumber));
-				user.setActive(rs.getBoolean(DBEnum.User.active));
-			}
-
-			return user;
-		} catch (Exception e) {
-			logger.error(e);
-			return null;
-		} finally {
-			cleanUp(stmt, rs);
-		}
+		// PreparedStatement stmt = null;
+		// ResultSet rs = null;
+		// try {
+		// String sql = "SELECT * FROM " + DBEnum.user + " WHERE " +
+		// DBEnum.User.userName + " = ?";
+		//
+		// stmt = connection.prepareStatement(sql);
+		//
+		// stmt.setString(1, username);
+		//
+		// rs = stmt.executeQuery();
+		//
+		// User user = null;
+		//
+		// if (rs.next()) {
+		// user = new User();
+		// user.setId(rs.getInt(DBEnum.User.id));
+		// user.setUsername(rs.getString(DBEnum.User.userName));
+		// user.setEmail(rs.getString(DBEnum.User.email));
+		// user.setPassword(rs.getString(DBEnum.User.password));
+		// user.setSecurityAnswer(rs.getString(DBEnum.User.securityAnswer));
+		// user.setSecurityQuestion(rs.getString(DBEnum.User.securityQuestion));
+		// user.setSiteName(rs.getString(DBEnum.User.siteName));
+		// user.setSiteNumber(rs.getString(DBEnum.User.siteNumber));
+		// user.setActive(rs.getBoolean(DBEnum.User.active));
+		// }
+		//
+		// return user;
+		// } catch (Exception e) {
+		// logger.error(e);
+		// return null;
+		// } finally {
+		// cleanUp(stmt, rs);
+		// }
+		return null;
 	}
 
 	@Override
@@ -207,13 +206,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 			if (rs.next()) {
 				user = new User();
 				user.setId(rs.getInt(DBEnum.User.id));
-				user.setUsername(rs.getString(DBEnum.User.userName));
 				user.setEmail(rs.getString(DBEnum.User.email));
 				user.setPassword(rs.getString(DBEnum.User.password));
-				user.setSecurityAnswer(rs.getString(DBEnum.User.securityAnswer));
-				user.setSecurityQuestion(rs.getString(DBEnum.User.securityQuestion));
-				user.setSiteName(rs.getString(DBEnum.User.siteName));
-				user.setSiteNumber(rs.getString(DBEnum.User.siteNumber));
+				user.setName(rs.getString(DBEnum.User.name));
 				user.setActive(rs.getBoolean(DBEnum.User.active));
 			}
 
@@ -228,30 +223,35 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 	@Override
 	public boolean updateUser(Connection connection, User user) {
-		PreparedStatement stmt = null;
-		try {
-			stmt = connection.prepareStatement("UPDATE  " + DBEnum.user + " SET " + DBEnum.User.securityAnswer
-					+ " = ?, " + DBEnum.User.userName + " = ?, " + DBEnum.User.email + " = ?, " + DBEnum.User.password
-					+ " = ?, " + DBEnum.User.securityQuestion + " = ?, " + DBEnum.User.siteName + " = ?, "
-					+ DBEnum.User.siteNumber + " = ?, " + DBEnum.User.active + " = ? WHERE id = ?  ");
-
-			stmt.setString(1, user.getSecurityAnswer());
-			stmt.setString(2, user.getUsername());
-			stmt.setString(3, user.getEmail());
-			stmt.setString(4, user.getPassword());
-			stmt.setString(5, user.getSecurityQuestion());
-			stmt.setString(6, user.getSiteName());
-			stmt.setString(7, user.getSiteNumber());
-			stmt.setBoolean(8, user.getActive());
-			stmt.setInt(9, user.getId());
-
-			return stmt.executeUpdate() == 1;
-		} catch (Exception e) {
-			logger.error(e);
-			return false;
-		} finally {
-			cleanUp(stmt, null);
-		}
+		// PreparedStatement stmt = null;
+		// try {
+		// stmt = connection.prepareStatement("UPDATE " + DBEnum.user + " SET "
+		// + DBEnum.User.securityAnswer
+		// + " = ?, " + DBEnum.User.userName + " = ?, " + DBEnum.User.email + "
+		// = ?, " + DBEnum.User.password
+		// + " = ?, " + DBEnum.User.securityQuestion + " = ?, " +
+		// DBEnum.User.siteName + " = ?, "
+		// + DBEnum.User.siteNumber + " = ?, " + DBEnum.User.active + " = ?
+		// WHERE id = ? ");
+		//
+		// stmt.setString(1, user.getSecurityAnswer());
+		// stmt.setString(2, user.getUsername());
+		// stmt.setString(3, user.getEmail());
+		// stmt.setString(4, user.getPassword());
+		// stmt.setString(5, user.getSecurityQuestion());
+		// stmt.setString(6, user.getSiteName());
+		// stmt.setString(7, user.getSiteNumber());
+		// stmt.setBoolean(8, user.getActive());
+		// stmt.setInt(9, user.getId());
+		//
+		// return stmt.executeUpdate() == 1;
+		// } catch (Exception e) {
+		// logger.error(e);
+		// return false;
+		// } finally {
+		// cleanUp(stmt, null);
+		// }
+		return false;
 	}
 
 	private void cleanUp(Statement stmt, ResultSet rs) {

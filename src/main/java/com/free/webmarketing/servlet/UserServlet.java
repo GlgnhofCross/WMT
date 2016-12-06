@@ -15,7 +15,6 @@ import com.free.webmarketing.dto.User;
 import com.free.webmarketing.exception.NotUniqueEmailException;
 import com.free.webmarketing.exception.NotUniqueUserNameException;
 import com.free.webmarketing.service.UserService;
-import com.free.webmarketing.util.EmailManager;
 import com.free.webmarketing.util.constant.Constants;
 
 @WebServlet("/User/UserServlet")
@@ -42,13 +41,13 @@ public class UserServlet extends HttpServlet {
 		if (logout != null) {
 			User user = (User) request.getSession().getAttribute(Constants.USER);
 
-			String msg = "";
-			if (user != null)
-				msg = user.getUsername();
-			else
-				msg = "";
+			// String msg = "";
+			// if (user != null)
+			// msg = user.getUsername();
+			// else
+			// msg = "";
 
-			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.LOGOUT + "=" + msg);
+			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.LOGOUT);
 
 			request.getSession().invalidate();
 		} else
@@ -72,11 +71,11 @@ public class UserServlet extends HttpServlet {
 
 		String msg = Constants.ERROR;
 
-		String username = request.getParameter(Constants.USERNAME);
+		String email = request.getParameter(Constants.EMAIL);
 		String password = request.getParameter(Constants.PASSWORD);
 		String remeberMe = request.getParameter(Constants.rememberMe);
 
-		User user = userService.login(username, password);
+		User user = userService.login(email, password);
 
 		if (user != null && user.getActive()) {
 			request.getSession().setAttribute(Constants.USER, user);
@@ -96,33 +95,23 @@ public class UserServlet extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String username = request.getParameter(Constants.USERNAME);
-		String[] email = request.getParameterValues(Constants.EMAIL);
-		String[] password = request.getParameterValues(Constants.PASSWORD);
-		String securityQuestion = request.getParameter(Constants.SECURITY_QUESTION);
-		String securityAnswer = request.getParameter(Constants.SECURITY_ANSWER);
-		String siteName = request.getParameter(Constants.SITE_NAME);
-		String siteNumber = request.getParameter(Constants.SITE_NUMBER);
+		String[] name = request.getParameterValues(Constants.NAME);
+		String email = request.getParameter(Constants.EMAIL);
+		String password = request.getParameter(Constants.PASSWORD);
 
-		if (password.length == 2 && !password[0].equals(password[1])) {
-			logger.error("passwords not matched");
-			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.ERROR);
-			return;
-		}
+		String nname;
+		if (name.length == 2) {
+			nname = name[0] + " " + name[1];
+		} else
+			nname = name[0];
 
-		if (email.length == 2 && !email[0].equals(email[1])) {
-			logger.error("emails not matched");
-			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.ERROR);
-			return;
-		}
-
-		User user = new User(0, username, email[0], password[0], siteName, siteNumber, securityQuestion, securityAnswer,
-				"");
+		User user = new User(0, nname, email, password);
 
 		String msg = "";
 		try {
 			user = userService.register(user);
-			EmailManager.send(email[0], "Activation Code", "Copy this code to activation Page " + user.getId());
+			// EmailManager.send(email[0], "Activation Code", "Copy this code to
+			// activation Page " + user.getId());
 			msg = "registration successfuly go to your email for activation";
 		} catch (NotUniqueUserNameException e) {
 			logger.error(e);
@@ -142,46 +131,52 @@ public class UserServlet extends HttpServlet {
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String username = request.getParameter(Constants.USERNAME);
-		String[] email = request.getParameterValues(Constants.EMAIL);
-		String[] password = request.getParameterValues(Constants.PASSWORD);
-		String securityQuestion = request.getParameter(Constants.SECURITY_QUESTION);
-		String securityAnswer = request.getParameter(Constants.SECURITY_ANSWER);
-		String siteName = request.getParameter(Constants.SITE_NAME);
-		String siteNumber = request.getParameter(Constants.SITE_NUMBER);
-
-		if (password.length == 2 && password[0] != password[1]) {
-			logger.error("passwords not matched");
-			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.ERROR);
-			return;
-		}
-
-		if (email.length == 2 && email[0] != email[1]) {
-			logger.error("emails not matched");
-			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.ERROR);
-			return;
-		}
-
-		User user = null;
-		User userSession = (User) request.getSession().getAttribute(Constants.USER);
-		String msg = "";
-		boolean flag = false;
-		try {
-			user = new User(userSession.getId(), username, email[0], password[0], siteName, siteNumber,
-					securityQuestion, securityAnswer, "");
-			flag = userService.updateUser(user);
-		} catch (NotUniqueUserNameException e) {
-			logger.error(e);
-			msg = Constants.INTERNALERROR;
-		} catch (NotUniqueEmailException e) {
-			logger.error(e);
-			msg = Constants.INTERNALERROR;
-		}
-
-		if (flag) {
-			request.getSession().setAttribute(Constants.USER, user);
-			msg = Constants.UPDATE;
-		}
-		response.sendRedirect("../" + Constants.INDEX + "?" + msg);
+		// String username = request.getParameter(Constants.USERNAME);
+		// String[] email = request.getParameterValues(Constants.EMAIL);
+		// String[] password = request.getParameterValues(Constants.PASSWORD);
+		// String securityQuestion =
+		// request.getParameter(Constants.SECURITY_QUESTION);
+		// String securityAnswer =
+		// request.getParameter(Constants.SECURITY_ANSWER);
+		// String siteName = request.getParameter(Constants.SITE_NAME);
+		// String siteNumber = request.getParameter(Constants.SITE_NUMBER);
+		//
+		// if (password.length == 2 && password[0] != password[1]) {
+		// logger.error("passwords not matched");
+		// response.sendRedirect("../" + Constants.INDEX + "?" +
+		// Constants.ERROR);
+		// return;
+		// }
+		//
+		// if (email.length == 2 && email[0] != email[1]) {
+		// logger.error("emails not matched");
+		// response.sendRedirect("../" + Constants.INDEX + "?" +
+		// Constants.ERROR);
+		// return;
+		// }
+		//
+		// User user = null;
+		// User userSession = (User)
+		// request.getSession().getAttribute(Constants.USER);
+		// String msg = "";
+		// boolean flag = false;
+		// try {
+		// user = new User(userSession.getId(), username, email[0], password[0],
+		// siteName, siteNumber,
+		// securityQuestion, securityAnswer, "");
+		// flag = userService.updateUser(user);
+		// } catch (NotUniqueUserNameException e) {
+		// logger.error(e);
+		// msg = Constants.INTERNALERROR;
+		// } catch (NotUniqueEmailException e) {
+		// logger.error(e);
+		// msg = Constants.INTERNALERROR;
+		// }
+		//
+		// if (flag) {
+		// request.getSession().setAttribute(Constants.USER, user);
+		// msg = Constants.UPDATE;
+		// }
+		// response.sendRedirect("../" + Constants.INDEX + "?" + msg);
 	}
 }

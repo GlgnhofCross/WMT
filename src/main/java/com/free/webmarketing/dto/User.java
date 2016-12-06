@@ -9,31 +9,21 @@ public class User extends BaseEntity {
 
 	private int id;
 
-	private String username;
+	private String name;
 	private String email;
 	private String password;
-	private String siteName;
-	private String siteNumber;
-	private String securityQuestion;
-	private String securityAnswer;
-	private Boolean active;
+	private boolean active;
 	private String status;
 
 	public User() {
 	}
 
-	public User(int id, String username, String email, String password, String siteName, String siteNumber,
-			String securityQuestion, String securityAnswer, String status) {
+	public User(int id, String name, String email, String password) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.name = name;
 		this.email = email;
-		this.password = password;
-		this.siteName = siteName;
-		this.siteNumber = siteNumber;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.status = status;
+		this.password = password; 
 	}
 
 	public int getId() {
@@ -44,12 +34,12 @@ public class User extends BaseEntity {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -68,43 +58,11 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public String getSiteName() {
-		return siteName;
-	}
-
-	public void setSiteName(String siteName) {
-		this.siteName = siteName;
-	}
-
-	public String getSiteNumber() {
-		return siteNumber;
-	}
-
-	public void setSiteNumber(String siteNumber) {
-		this.siteNumber = siteNumber;
-	}
-
-	public String getSecurityQuestion() {
-		return securityQuestion;
-	}
-
-	public void setSecurityQuestion(String securityQuestion) {
-		this.securityQuestion = securityQuestion;
-	}
-
-	public String getSecurityAnswer() {
-		return securityAnswer;
-	}
-
-	public void setSecurityAnswer(String securityAnswer) {
-		this.securityAnswer = securityAnswer;
-	}
-
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 
@@ -115,4 +73,5 @@ public class User extends BaseEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 }

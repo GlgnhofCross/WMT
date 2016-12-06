@@ -31,12 +31,13 @@ public class UserService extends BaseService {
 		try {
 			connection = DBConnectionManager.getConnectionFromPool();
 
-			if (userDao.isUsernameExits(connection, user.getUsername())) {
-				NotUniqueUserNameException e = new NotUniqueUserNameException(
-						"Creating user failed, " + user.getUsername() + " Already Exists");
-				logger.error(e);
-				throw e;
-			}
+			// if (userDao.isUsernameExits(connection, user.getUsername())) {
+			// NotUniqueUserNameException e = new NotUniqueUserNameException(
+			// "Creating user failed, " + user.getUsername() + " Already
+			// Exists");
+			// logger.error(e);
+			// throw e;
+			// }
 
 			if (userDao.isEmailExits(connection, user.getEmail())) {
 				NotUniqueEmailException e = new NotUniqueEmailException(
@@ -59,13 +60,13 @@ public class UserService extends BaseService {
 		return user;
 	}
 
-	public User login(String username, String password) {
+	public User login(String email, String password) {
 		User user = null;
 		Connection connection = null;
 		try {
 			connection = DBConnectionManager.getConnectionFromPool();
 
-			user = userDao.findUserByUsername(connection, username);
+			user = userDao.findUserByEmail(connection, email);
 
 			if (user != null && !user.getPassword().equals(password))
 				user = null;
@@ -82,12 +83,14 @@ public class UserService extends BaseService {
 		try {
 			connection = DBConnectionManager.getConnectionFromPool();
 
-			if (userDao.isUsernameExits(connection, user.getUsername(), user.getId())) {
-				NotUniqueUserNameException e = new NotUniqueUserNameException(
-						"Creating user failed, " + user.getUsername() + " Already Exists");
-				logger.error(e);
-				throw e;
-			}
+			// if (userDao.isUsernameExits(connection, user.getUsername(),
+			// user.getId())) {
+			// NotUniqueUserNameException e = new NotUniqueUserNameException(
+			// "Creating user failed, " + user.getUsername() + " Already
+			// Exists");
+			// logger.error(e);
+			// throw e;
+			// }
 
 			if (userDao.isEmailExits(connection, user.getEmail(), user.getId())) {
 				NotUniqueEmailException e = new NotUniqueEmailException(
