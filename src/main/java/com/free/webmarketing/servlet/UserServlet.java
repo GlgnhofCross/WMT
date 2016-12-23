@@ -69,6 +69,11 @@ public class UserServlet extends HttpServlet {
 			return;
 		}
 
+		if (put != null && put.equals(Constants.active)) {
+			doActive(request, response);
+			return;
+		}
+
 		String msg = Constants.ERROR;
 
 		String email = request.getParameter(Constants.EMAIL);
@@ -89,7 +94,7 @@ public class UserServlet extends HttpServlet {
 			response.sendRedirect("../" + Constants.INDEX + "?" + Constants.activation);
 			return;
 		}
-		response.sendRedirect("../" + Constants.INDEX + "?" + msg);
+		response.sendRedirect("../" + Constants.MAIN + "?" + msg);
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
@@ -126,6 +131,63 @@ public class UserServlet extends HttpServlet {
 		// msg = Constants.WELCOME;
 		// }
 		response.sendRedirect("../" + Constants.INDEX + "?" + msg);
+	}
+
+	private void doActive(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		int id = Integer.parseInt(request.getParameter("userId"));
+		boolean setTo = Boolean.parseBoolean(request.getParameter("setTo"));
+		userService.activeUnactiveUser(id, setTo);
+		response.sendRedirect("../cp/acounts.jsp");
+
+		// String username = request.getParameter(Constants.USERNAME);
+		// String[] email = request.getParameterValues(Constants.EMAIL);
+		// String[] password = request.getParameterValues(Constants.PASSWORD);
+		// String securityQuestion =
+		// request.getParameter(Constants.SECURITY_QUESTION);
+		// String securityAnswer =
+		// request.getParameter(Constants.SECURITY_ANSWER);
+		// String siteName = request.getParameter(Constants.SITE_NAME);
+		// String siteNumber = request.getParameter(Constants.SITE_NUMBER);
+		//
+		// if (password.length == 2 && password[0] != password[1]) {
+		// logger.error("passwords not matched");
+		// response.sendRedirect("../" + Constants.INDEX + "?" +
+		// Constants.ERROR);
+		// return;
+		// }
+		//
+		// if (email.length == 2 && email[0] != email[1]) {
+		// logger.error("emails not matched");
+		// response.sendRedirect("../" + Constants.INDEX + "?" +
+		// Constants.ERROR);
+		// return;
+		// }
+		//
+		// User user = null;
+		// User userSession = (User)
+		// request.getSession().getAttribute(Constants.USER);
+		// String msg = "";
+		// boolean flag = false;
+		// try {
+		// user = new User(userSession.getId(), username, email[0], password[0],
+		// siteName, siteNumber,
+		// securityQuestion, securityAnswer, "");
+		// flag = userService.updateUser(user);
+		// } catch (NotUniqueUserNameException e) {
+		// logger.error(e);
+		// msg = Constants.INTERNALERROR;
+		// } catch (NotUniqueEmailException e) {
+		// logger.error(e);
+		// msg = Constants.INTERNALERROR;
+		// }
+		//
+		// if (flag) {
+		// request.getSession().setAttribute(Constants.USER, user);
+		// msg = Constants.UPDATE;
+		// }
+		// response.sendRedirect("../" + Constants.INDEX + "?" + msg);
 	}
 
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response)

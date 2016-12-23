@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -45,6 +46,35 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		} catch (Exception e) {
 			logger.error(e);
 			return false;
+		} finally {
+			cleanUp(stmt, rs);
+		}
+	}
+
+	public ArrayList<User> getAllUsers(Connection connection) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<User> users = new ArrayList<>();
+		try {
+			String sql = "SELECT * FROM " + DBEnum.user;
+
+			stmt = connection.prepareStatement(sql);
+
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt(DBEnum.User.id));
+				user.setEmail(rs.getString(DBEnum.User.email));
+				user.setPassword(rs.getString(DBEnum.User.password));
+				user.setName(rs.getString(DBEnum.User.name));
+				user.setActive(rs.getBoolean(DBEnum.User.active));
+				users.add(user);
+			}
+			return users;
+		} catch (Exception e) {
+			logger.error(e);
+			return new ArrayList<>();
 		} finally {
 			cleanUp(stmt, rs);
 		}
@@ -252,6 +282,25 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		// cleanUp(stmt, null);
 		// }
 		return false;
+	}
+
+	@Override
+	public boolean activeUnactiveUser(Connection connection, int userId, boolean stat) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = connection
+					.prepareStatement("UPDATE " + DBEnum.user + " SET " + DBEnum.User.active + " = ? WHERE id = ? ");
+
+			stmt.setBoolean(1, stat);
+			stmt.setInt(2, userId);
+
+			return stmt.executeUpdate() == 1;
+		} catch (Exception e) {
+			logger.error(e);
+			return false;
+		} finally {
+			cleanUp(stmt, null);
+		}
 	}
 
 	private void cleanUp(Statement stmt, ResultSet rs) {

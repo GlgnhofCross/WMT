@@ -5,6 +5,7 @@
 package com.free.webmarketing.dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.free.webmarketing.dao.base.BaseDao;
 import com.free.webmarketing.dto.User;
@@ -16,6 +17,8 @@ import com.free.webmarketing.dto.User;
 public interface UserDao extends BaseDao {
 
 	public boolean addUser(Connection connection, User user);
+	
+	public ArrayList<User> getAllUsers(Connection connection);
 
 	public boolean updateUser(Connection connection, User user);
 
@@ -30,5 +33,7 @@ public interface UserDao extends BaseDao {
 	public boolean isEmailExits(Connection connection, String email, int id);
 
 	public boolean isUsernameExits(Connection connection, String username, int id);
+	
+	public boolean activeUnactiveUser(Connection connection, int userId, boolean stat);
 
 }

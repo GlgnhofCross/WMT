@@ -39,7 +39,7 @@
 					<ul class="nav navbar-nav pull-right">
 						<li class="active"><a href="index.jsp" class="">الرئيسية</a></li>
 						<li><a href="#" class="">سياسة الخصوصية</a></li>
-						<li><a href="main.html" class="">المهمات </a></li>
+						<li><a href="main.jsp" class="">المهمات </a></li>
 						<li><a href="#" class="">شروط الخدمات </a></li>
 						<li><a href="setting.html" class="">الإعدادات</a></li>
 						<li><a href="contact us.html" class="">تواصل معنا</a></li>

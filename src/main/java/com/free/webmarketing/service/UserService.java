@@ -1,6 +1,8 @@
 package com.free.webmarketing.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -12,6 +14,7 @@ import com.free.webmarketing.exception.NotUniqueUserNameException;
 import com.free.webmarketing.service.base.BaseService;
 import com.free.webmarketing.util.DBConnectionManager;
 import com.free.webmarketing.util.constant.Constants;
+import com.free.webmarketing.util.constant.DBEnum;
 
 public class UserService extends BaseService {
 
@@ -60,6 +63,21 @@ public class UserService extends BaseService {
 		return user;
 	}
 
+	public ArrayList<User> getAllUsers() {
+		ArrayList<User> users = null;
+		Connection connection = null;
+		try {
+			connection = DBConnectionManager.getConnectionFromPool();
+			users = userDao.getAllUsers(connection);
+		} catch (InterruptedException e) {
+			logger.error(e);
+			users = new ArrayList<User>();
+		} finally {
+			DBConnectionManager.backConnectionToPool(connection);
+		}
+		return users;
+	}
+
 	public User login(String email, String password) {
 		User user = null;
 		Connection connection = null;
@@ -100,6 +118,19 @@ public class UserService extends BaseService {
 			}
 			return userDao.updateUser(connection, user);
 
+		} catch (InterruptedException e) {
+			logger.error(e);
+			return false;
+		} finally {
+			DBConnectionManager.backConnectionToPool(connection);
+		}
+	}
+
+	public boolean activeUnactiveUser(int userId, boolean stat) {
+		Connection connection = null;
+		try {
+			connection = DBConnectionManager.getConnectionFromPool();
+			return userDao.activeUnactiveUser(connection, userId, stat);
 		} catch (InterruptedException e) {
 			logger.error(e);
 			return false;

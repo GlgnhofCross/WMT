@@ -12,6 +12,7 @@ public class Constants {
 
 	// Pages Names
 	public static final String INDEX = "index.jsp";
+	public static final String MAIN = "main.jsp";
 
 	// Session Object Value
 	public final static String USER = "user";
@@ -25,6 +26,8 @@ public class Constants {
 	public final static String SECURITY_ANSWER = "securityAnswer";
 	public final static String SITE_NUMBER = "sitenumber";
 	public final static String SITE_NAME = "sitename";
+	
+	public final static String active = "active";
 
 	public final static String rememberMe = "rememberme";
 
@@ -198,6 +201,14 @@ public class Constants {
 
 	public String getActivation() {
 		return activation;
+	}
+
+	public static String getMain() {
+		return MAIN;
+	}
+
+	public String getActive() {
+		return active;
 	}
 
 }
